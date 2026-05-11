@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+<title>DDDMI CORP • Catgram • Политика конфиденциальности</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #0a0e17;
+    color: #eef2ff;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.sidebar { width: 320px; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; overflow-y: auto; flex-shrink: 0; }
+.menu-toggle { display: none; }
+
+@media (max-width: 768px), (pointer: coarse) {
+    .sidebar { width: 280px !important; transform: translateX(-100%); position: fixed; z-index: 200; height: 100%; transition: transform 0.3s; background: #171d2b !important; }
+    .sidebar.open { transform: translateX(0); }
+    .menu-toggle { display: block !important; position: fixed; top: 15px; left: 15px; z-index: 201; background: #1a5cff; border: none; padding: 10px 15px; border-radius: 30px; color: white; font-weight: 600; cursor: pointer; }
+    .profile-avatar { width: 60px !important; height: 60px !important; font-size: 36px !important; }
+    .message { max-width: 85% !important; }
+    .bank-window { width: 95% !important; left: 2.5% !important; top: 5% !important; height: 90% !important; }
+}
+
+button, .bank-action-btn, .friend-item, .theme-btn, .promo-btn, .logout-btn, .search-box button, .shop-item, .sticker-btn, .settings-btn {
+    transition: all 0.25s;
+    cursor: pointer;
+    border-radius: 40px !important;
+    font-weight: 600 !important;
+}
+button:hover, .bank-action-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+
+body.classic { background: #0a0e17; color: #eef2ff; }
+body.classic .sidebar, body.classic .chat-header, body.classic .bottom,
+body.classic .profile, body.classic .friend-item, body.classic .request-item,
+body.classic .message, body.classic .modal-content, body.classic .bank-window,
+body.classic .sticker-pack, body.classic .settings-panel, body.classic .admin-panel {
+    background: #171d2b !important;
+    border-color: #2a3a5a !important;
+}
+body.classic .message.me { background: linear-gradient(135deg, #1a5cff, #0d3fa3) !important; }
+body.classic button, body.classic .bank-action-btn, body.classic .theme-btn, body.classic .promo-btn, body.classic .search-box button, body.classic .sticker-btn, body.classic .settings-btn {
+    background: linear-gradient(135deg, #1a5cff, #0d3fa3) !important;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+body.neon { background: #0a0f0a; color: #0f0; }
+body.neon .sidebar, body.neon .chat-header, body.neon .bottom,
+body.neon .profile, body.neon .friend-item, body.neon .request-item,
+body.neon .message, body.neon .modal-content, body.neon .bank-window,
+body.neon .sticker-pack, body.neon .settings-panel, body.neon .admin-panel {
+    background: #0a1a0a !important;
+    border-color: #0f0 !important;
+}
+body.neon .message.me { background: #0f0 !important; color: #000 !important; }
+body.neon button, body.neon .bank-action-btn, body.neon .theme-btn, body.neon .promo-btn, body.neon .search-box button, body.neon .sticker-btn, body.neon .settings-btn {
+    background: #0f0 !important;
+    color: #000 !important;
+}
+
+.app { display: flex; height: 100vh; width: 100%; }
+.app.hidden { display: none; }
+
+.profile {
+    margin: 20px 16px;
+    border-radius: 24px;
+    border: 1px solid rgba(66, 99, 165, 0.4);
+    background: linear-gradient(145deg, #1b2333, #131927);
+    overflow: hidden;
+    position: relative;
+}
+.profile-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.25;
+    z-index: 0;
+}
+.profile-bg.gta { background: linear-gradient(135deg, #ff6600, #cc3300); }
+.profile-bg.anime { background: linear-gradient(135deg, #ff69b4, #c71585); }
+.profile-bg.minecraft { background: linear-gradient(135deg, #5c5c5c, #2c2c2c); }
+.profile-bg.roblox { background: linear-gradient(135deg, #ff0000, #990000); }
+.profile-bg.pc { background: linear-gradient(135deg, #00aaff, #0066aa); }
+.profile-bg.phone { background: linear-gradient(135deg, #00ff88, #009955); }
+.profile-bg.dddima { background: linear-gradient(135deg, #7c3aed, #4c1d95); opacity: 0.35; }
+
+.profile-content {
+    position: relative;
+    z-index: 1;
+    padding: 20px 16px;
+    text-align: center;
+}
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f141f;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-border-neon-purple { box-shadow: 0 0 0 3px #9c54ff, 0 0 0 6px rgba(156,84,255,0.3); }
+.avatar-border-neon-red { box-shadow: 0 0 0 3px #ff4444, 0 0 0 6px rgba(255,68,68,0.3); }
+.avatar-border-neon-pink { box-shadow: 0 0 0 3px #ff69b4, 0 0 0 6px rgba(255,105,180,0.3); }
+.profile-name { font-size: 18px; font-weight: 700; background: linear-gradient(135deg, #fff, #aaccff); background-clip: text; -webkit-background-clip: text; color: transparent; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.tester-badge { background: #fbbf24; color: #000; border-radius: 20px; padding: 2px 8px; font-size: 10px; font-weight: bold; }
+.dev-badge { background: #9c54ff; color: white; border-radius: 20px; padding: 2px 8px; font-size: 10px; font-weight: bold; }
+.admin-badge { background: #dc2626; color: white; border-radius: 20px; padding: 2px 8px; font-size: 10px; font-weight: bold; }
+.frank-badge { width: 24px; height: 24px; vertical-align: middle; border-radius: 50%; object-fit: cover; }
+.wallet-info { background: rgba(0,0,0,0.5); border-radius: 40px; padding: 8px 12px; margin: 12px 0; }
+.wallet-balance { font-size: 20px; font-weight: 700; color: #fbbf24; }
+.key-container { display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 40px; margin-top: 8px; font-size: 11px; }
+.copy-small-btn { border: none; padding: 4px 12px; border-radius: 30px; cursor: pointer; background: rgba(255,255,255,0.2) !important; }
+.search-box { display: flex; gap: 10px; padding: 0 16px; margin: 16px 0; }
+.search-box input { flex: 1; padding: 10px 16px; border-radius: 30px; border: 1px solid #2a3a5a; background: #0f141f; color: white; }
+.friends-list, .requests-list, .groups-list { padding: 0 12px; max-height: 180px; overflow-y: auto; }
+.friend-item, .request-item, .group-item {
+    border-radius: 16px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #2a3a5a;
+}
+.friend-item:hover, .group-item:hover { transform: translateX(5px); background: #1f2a3f !important; }
+.friend-info { display: flex; gap: 12px; align-items: center; }
+.friend-avatar { width: 44px; height: 44px; font-size: 28px; display: flex; align-items: center; justify-content: center; background: #0f141f; border-radius: 50%; overflow: hidden; }
+.friend-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.chat { flex: 1; display: flex; flex-direction: column; }
+.chat-header { padding: 16px 24px; border-bottom: 1px solid #2a3a5a; display: flex; justify-content: space-between; align-items: center; }
+.sticker-panel {
+    background: rgba(0,0,0,0.5);
+    border-radius: 16px;
+    padding: 8px;
+    margin: 8px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    max-height: 80px;
+}
+.sticker { font-size: 36px; cursor: pointer; transition: transform 0.1s; padding: 4px; background: rgba(0,0,0,0.3); border-radius: 12px; }
+.sticker:hover { transform: scale(1.1); }
+.sticker-img { width: 48px; height: 48px; object-fit: cover; border-radius: 12px; }
+.messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.message { padding: 10px 18px; border-radius: 20px; max-width: 70%; width: fit-content; }
+.message.me { align-self: flex-end; border-bottom-right-radius: 4px; background: linear-gradient(135deg, #1a5cff, #0d3fa3); }
+.message:not(.me) { border-bottom-left-radius: 4px; background: #1f2a3f; }
+.sticker-message { font-size: 48px; line-height: 1; }
+.sticker-message-img { max-width: 120px; max-height: 120px; border-radius: 16px; }
+.bottom { display: flex; gap: 12px; padding: 16px 20px; border-top: 1px solid #2a3a5a; }
+.bottom input { flex: 1; padding: 12px 18px; border-radius: 40px; border: 1px solid #2a3a5a; background: #0f141f; color: white; }
+.notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2a3f;
+    backdrop-filter: blur(12px);
+    padding: 12px 28px;
+    border-radius: 60px;
+    z-index: 10050;
+    border: 1px solid #2a6cff;
+    animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+.bank-window {
+    position: fixed;
+    top: 10%;
+    left: 25%;
+    width: 50%;
+    height: 80%;
+    background: #171d2b;
+    border-radius: 32px;
+    border: 1px solid rgba(42,108,255,0.5);
+    z-index: 10001;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.bank-header { padding: 16px 24px; background: linear-gradient(135deg, #1f2a3f, #171d2b); border-radius: 32px 32px 0 0; display: flex; justify-content: space-between; align-items: center; cursor: move; }
+.bank-body { flex: 1; padding: 24px; overflow-y: auto; }
+.bank-card { background: linear-gradient(135deg, #1a2a4a, #0f1a2f); border-radius: 28px; padding: 24px; margin-bottom: 24px; text-align: center; }
+.bank-input { width: 100%; padding: 12px 18px; border-radius: 40px; margin: 10px 0; background: #0f141f; border: 1px solid #2a3a5a; color: white; }
+.bank-action-btn { width: 100%; padding: 12px; margin: 8px 0; }
+.shop-grid { display: flex; flex-wrap: wrap; gap: 12px; margin: 15px 0; }
+.shop-item { background: linear-gradient(135deg, #0f141f, #171d2b); border-radius: 20px; padding: 12px; text-align: center; width: 100px; border: 1px solid #2a3a5a; cursor: pointer; }
+.shop-item:hover { transform: scale(1.05); }
+
+.modal, .settings-panel, .admin-panel, .privacy-panel {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 11000;
+}
+.modal-content, .settings-content, .admin-content, .privacy-content {
+    background: #171d2b;
+    padding: 28px;
+    border-radius: 32px;
+    width: 460px;
+    max-width: 92%;
+    text-align: center;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.settings-btn { margin: 8px 16px; background: #1f2a3f !important; }
+.settings-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.admin-input { width: 100%; padding: 12px; border-radius: 30px; margin: 10px 0; background: #0f141f; border: 1px solid #2a6cff; color: white; }
+.privacy-text { text-align: left; font-size: 13px; line-height: 1.5; margin: 15px 0; color: #ccd6f0; }
+.privacy-text h3 { margin: 15px 0 5px; color: #fff; }
+.privacy-text p { margin-bottom: 10px; }
+
+.sticker-pack { background: #1f2a3f; border-radius: 16px; padding: 12px; margin: 8px 0; }
+.sticker-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.sticker-item { font-size: 40px; cursor: pointer; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 12px; transition: 0.1s; position: relative; }
+.sticker-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 12px; }
+.sticker-delete { position: absolute; top: -8px; right: -8px; background: #dc2626; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+.auth-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, #0a0e1a, #03050a);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auth-card { background: #171d2b; width: 460px; max-width: 92%; border-radius: 32px; padding: 36px 32px; border: 1px solid #2a6cff; }
+.auth-tabs { display: flex; gap: 8px; background: #0f141f; padding: 5px; border-radius: 60px; margin-bottom: 28px; }
+.tab-btn { flex: 1; background: transparent; border: none; padding: 10px; border-radius: 50px; cursor: pointer; color: #8a9bcd; font-weight: 600; }
+.tab-btn.active { background: linear-gradient(135deg, #2a6cff, #1a4fb3); color: white; }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+.auth-input { width: 100%; padding: 12px 18px; border-radius: 30px; margin-bottom: 16px; border: 1px solid #2a3a5a; background: #0f141f; color: white; }
+.auth-btn { width: 100%; padding: 12px; border-radius: 40px; font-weight: 700; background: linear-gradient(135deg, #2a6cff, #1a4fb3); color: white; border: none; }
+.avatar-selector { display: flex; gap: 20px; justify-content: center; margin: 16px 0; }
+.avatar-option { font-size: 42px; cursor: pointer; padding: 8px; border-radius: 50%; background: #0f141f; }
+.avatar-option.selected { background: #2a6cff; transform: scale(1.1); }
+</style>
+</head>
+<body class="classic">
+
+<button class="menu-toggle" onclick="toggleSidebar()">☰ Меню</button>
+
+<div id="appContainer" class="app hidden">
+    <div class="sidebar" id="sidebar">
+        <div class="profile" id="profileContainer">
+            <div class="profile-bg" id="profileBg"></div>
+            <div class="profile-content">
+                <div class="profile-avatar" id="profileAvatar" onclick="changeAvatarFromGallery()">😺</div>
+                <div class="profile-name" id="profileName"></div>
+                <div class="profile-login" id="profileLogin"></div>
+                <div class="wallet-info"><div>🐱 CATS</div><div class="wallet-balance" id="walletBalance">0</div></div>
+                <div class="key-container"><span>🔑 <span id="userKey"></span></span><button class="copy-small-btn" onclick="copyUserKey()">📋</button></div>
+                <button class="settings-btn" onclick="openSettings()" style="margin-top:12px; width:100%;">⚙️ Настройки</button>
+            </div>
+        </div>
+        <div class="search-box"><input id="searchInput" placeholder="Поиск..." onkeypress="if(event.key==='Enter') searchUser()"><button onclick="searchUser()">Найти</button></div>
+        <div id="searchResult" style="padding:0 14px;"></div>
+        <div style="padding:0 18px; font-size:12px; font-weight:600; margin:18px 0 10px;">👥 ДРУЗЬЯ <span id="friendsCount"></span></div>
+        <div id="friendsList" class="friends-list"></div>
+        <div style="padding:0 18px; font-size:12px; font-weight:600;">📨 ЗАЯВКИ <span id="requestsCount"></span></div>
+        <div id="requestsList" class="friends-list"></div>
+        <div style="padding:0 18px; font-size:12px; font-weight:600;">👥 ГРУППЫ <span id="groupsCount"></span></div>
+        <div id="groupsList" class="groups-list"></div>
+        <button style="margin:8px 16px 20px; background:#dc2626; padding:10px; border-radius:40px; font-weight:600;" onclick="logout()">🚪 ВЫЙТИ</button>
+    </div>
+    <div class="chat">
+        <div class="chat-header">
+            <h2 id="chatTitle">✨ CATGRAM</h2>
+            <button onclick="toggleTheme()" class="theme-btn">🎨 Тема</button>
+        </div>
+        <div id="stickerPanel" class="sticker-panel" style="display: none;"></div>
+        <div id="messages" class="messages"></div>
+        <div class="bottom">
+            <input id="msgInput" placeholder="Сообщение..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <input type="file" id="photoInput" accept="image/*" class="file-input" style="display:none;" onchange="sendPhoto()">
+            <button onclick="document.getElementById('photoInput').click()">📷</button>
+            <button onclick="toggleStickerPanel()">😊</button>
+            <button onclick="sendMessage()">📤</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ========== ДАННЫЕ ==========
+let users = JSON.parse(localStorage.getItem("BetaMessenger_users")) || {};
+let privateChats = JSON.parse(localStorage.getItem("BetaMessenger_chats")) || {};
+let stickerPacks = JSON.parse(localStorage.getItem("BetaMessenger_stickers")) || {};
+let groups = JSON.parse(localStorage.getItem("BetaMessenger_groups")) || {};
+let currentUser = null;
+let currentChat = null;
+let currentChatType = 'user';
+let miningInterval = null;
+let bankWindow = null;
+let selectedAvatar = "😺";
+
+const BOT_LOGIN = "CatBaxtBot";
+const FRANK_GIF_URL = "https://media.tenor.com/R0KzM0q0WQYAAAAi/syltryx-siltrix.gif";
+const backgrounds = [
+    { id: 'gta', name: 'GTA', price: 1200, preview: '🏎️' },
+    { id: 'anime', name: 'Аниме', price: 1200, preview: '🎌' },
+    { id: 'minecraft', name: 'Майнкрафт', price: 1200, preview: '⛏️' },
+    { id: 'roblox', name: 'Roblox', price: 1200, preview: '🧱' },
+    { id: 'pc', name: 'ПК', price: 1200, preview: '💻' },
+    { id: 'phone', name: 'Телефон', price: 1200, preview: '📱' },
+    { id: 'dddima', name: 'DDDIMA', price: 0, preview: '😺💜' }
+];
+const borders = [
+    { id: 'neon-purple', name: 'Неон Фиолетовый', price: 500, preview: '🟣' },
+    { id: 'neon-red', name: 'Неон Красный', price: 500, preview: '🔴' },
+    { id: 'neon-pink', name: 'Неон Розовый', price: 500, preview: '💕' }
+];
+
+function formatNumber(num) { return (num || 0).toLocaleString('ru-RU'); }
+function parseNumber(str) { return parseInt(str.replace(/[^\d]/g, '')) || 0; }
+function escapeHTML(s) { return String(s).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'})[m]); }
+function playSound() { try { let ctx = new (window.AudioContext || window.webkitAudioContext)(); let o = ctx.createOscillator(); let g = ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value = 880; g.gain.value = 0.08; o.type = 'sine'; o.start(); g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.3); o.stop(ctx.currentTime + 0.3); if(ctx.state === 'suspended') ctx.resume(); } catch(e) {} }
+function showNotification(msg) { let n = document.createElement('div'); n.className='notification'; n.innerText=msg; document.body.appendChild(n); setTimeout(()=>n.remove(), 2000); }
+function getKey(a,b) { return [a,b].sort().join('_'); }
+function copyUserKey() { let key = users[currentUser]?.secretKey; if(key) navigator.clipboard.writeText(key); showNotification("🔑 Ключ скопирован"); }
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+
+// ========== ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ==========
+function openPrivacyPolicy() {
+    let modal = document.createElement('div'); modal.className='privacy-panel';
+    modal.innerHTML = `<div class="privacy-content"><h2>📋 ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</h2>
+        <div class="privacy-text">
+            <p><strong>Дата вступления в силу:</strong> 11.05.2026</p>
+            <p><strong>Последнее обновление:</strong> 11.05.2026</p>
+            <h3>1. Общие положения</h3>
+            <p>Настоящая Политика конфиденциальности описывает, как DDDMI CORP собирает, использует, хранит и защищает информацию пользователей при использовании мессенджера Catgram.</p>
+            <h3>2. Какие данные мы собираем</h3>
+            <p><strong>Обязательные:</strong> логин, имя, аватар, список друзей, сообщения (хранятся локально и в localStorage).</p>
+            <p><strong>Технические:</strong> IP-адрес, тип устройства, версия браузера (анонимно).</p>
+            <h3>3. Как мы используем ваши данные</h3>
+            <p>Для обеспечения работы пересылки сообщений, звонков, улучшения интерфейса и предотвращения спама.</p>
+            <h3>4. Хранение данных</h3>
+            <p>Все данные хранятся в localStorage вашего браузера. Вы можете удалить их в любой момент, очистив кэш.</p>
+            <h3>5. Ваши права</h3>
+            <p>Вы имеете право запросить копию данных, исправить неточности, удалить аккаунт.</p>
+            <h3>6. Контакты</h3>
+            <p>📧 Email: privacy@catgram.com<br>💬 Чат поддержки: @CatgramSupport</p>
+        </div>
+        <button onclick="this.closest('.privacy-panel').remove()" style="margin-top:15px;">Закрыть</button>
+    </div>`;
+    document.body.appendChild(modal);
+}
+
+// ========== СМЕНА АВАТАРА ==========
+function changeAvatarFromGallery() {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = e => {
+        let file = e.target.files[0];
+        if(file) {
+            let reader = new FileReader();
+            reader.onload = ev => {
+                users[currentUser].avatar = `<img src="${ev.target.result}" style="width:100%; height:100%; object-fit:cover;">`;
+                localStorage.setItem("BetaMessenger_users", JSON.stringify(users));
+                fullRefresh();
+                showNotification("✅ Аватар обновлён!");
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    input.click();
+}
+
+// ========== ПРЕМИУМ: СКРЫТИЕ ЗНАЧКОВ (выборочное) ==========
+function toggleBadge(type) {
+    let user = users[currentUser];
+    if(!user.premium) { showNotification("💎 Только для премиум"); return; }
+    if(!user.hiddenBadges) user.hiddenBadges = [];
+    if(user.hiddenBadges.includes(type)) {
+        user.hiddenBadges = user.hiddenBadges.filter(t => t !== type);
+        showNotification(`🔓 Значок ${type} показан`);
+    } else {
+        user.hiddenBadges.push(type);
+        showNotification(`🔒 Значок ${type} скрыт`);
+    }
+    localStorage.setItem("BetaMessenger_users", JSON.stringify(users));
+    fullRefresh();
+}
+
+function openBadgeSettings() {
+    let user = users[currentUser];
+    let hidden = user.hiddenBadges || [];
+    let modal = document.createElement('div'); modal.className='modal';
+    modal.innerHTML = `<div class="modal-content"><h3>🏷️ НАСТРОЙКА ЗНАЧКОВ</h3>
+        <div style="display:flex; flex-direction:column; gap:10px; margin:15px 0;">
+            <button onclick="toggleBadge('premium'); this.closest('.modal').remove()" style="background:${hidden.includes('premium')?'#555':'#1a5cff'};">👑 Премиум ${hidden.includes('premium')?'(скрыт)':'(показан)'}</button>
+            <button onclick="toggleBadge('verified'); this.closest('.modal').remove()" style="background:${hidden.includes('verified')?'#555':'#1a5cff'};">✓ Верификация ${hidden.includes('verified')?'(скрыт)':'(показан)'}</button>
+            <button onclick="toggleBadge('tester'); this.closest('.modal').remove()" style="background:${hidden.includes('tester')?'#555':'#1a5cff'};">⚙️ Тестер ${hidden.includes('tester')?'(скрыт)':'(показан)'}</button>
+            <button onclick="toggleBadge('dev'); this.closest('.modal').remove()" style="background:${hidden.includes('dev')?'#555':'#1a5cff'};">🔧 Dev ${hidden.includes('dev')?'(скрыт)':'(показан)'}</button>
+            <button onclick="toggleBadge('admin'); this.closest('.modal').remove()" style="background:${hidden.includes('admin')?'#555':'#1a5cff'};">👑 Admin ${hidden.includes('admin')?'(скрыт)':'(показан)'}</button>
+            <button onclick="toggleBadge('frank'); this.closest('.modal').remove()" style="background:${hidden.includes('frank')?'#555':'#1a5cff'};">🎭 Frank ${hidden.includes('frank')?'(скрыт)':'(показан)'}</button>
+            <button onclick="toggleBadge('customGif'); this.closest('.modal').remove()" style="background:${hidden.includes('customGif')?'#555':'#1a5cff'};">🎬 GIF ${hidden.includes('customGif')?'(скрыт)':'(показан)'}</button>
+        </div>
+        <button onclick="this.closest('.modal').remove()">Закрыть</button>
+    </div>`;
+    document.body.appendChild(modal);
+}
+
+// ========== ПРЕМИУМ: ЗАГРУЗКА GIF С TENOR ==========
+function setTenorGif() {
+    if(!users[currentUser]?.premium) { showNotification("💎 Только для премиум"); return; }
+    let url = prompt("Введите прямую ссылку на GIF (например, с Tenor):\nhttps://media.tenor.com/XXXXX.gif");
+    if(url && url.startsWith('http')) {
+        users[currentUser].customGif = url;
+        localStorage.setItem("BetaMessenger_users", JSON.stringify(users));
+        fullRefresh();
+        showNotification("✅ GIF установлен!");
+    } else if(url) showNotification("❌ Неверная ссылка");
+}
+
+// ========== ГРУППЫ ==========
+function showCreateGroupModal() {
+    let modal = document.createElement('div'); modal.className='modal';
+    modal.innerHTML = `<div class="modal-content"><h3>👥 Создать группу</h3><input id="groupNameInput" placeholder="Название группы" class="admin-input"><button onclick="createGroup()">Создать</button><button onclick="this.closest('.modal').remove()">Отмена</button></div>`;
+    document.body.appendChild(modal);
+}
+function createGroup() {
+    let name = document.getElementById('groupNameInput')?.value.trim();
+    if(!name) return;
+    let groupId = 'group_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+    groups[groupId] = { name: name, creator: currentUser, members: [currentUser], messages: [] };
+    localStorage.setItem("BetaMessenger_groups", JSON.stringify(groups));
+    document.querySelector('.modal')?.remove();
+    updateGroupsList();
+    showNotification(`✅ Группа "${name}" создана!`);
+}
+function addToGroup(groupId) {
+    let modal = document.createElement('div'); modal.className='modal';
+    modal.innerHTML = `<div class="modal-content"><h3>➕ Добавить в группу</h3><input id="userLoginInput" placeholder="Логин пользователя" class="admin-input"><button onclick="addUserToGroup('${groupId}')">Добавить</button><button onclick="this.closest('.modal').remove()">Отмена</button></div>`;
+    document.body.appendChild(modal);
+}
+function addUserToGroup(groupId) {
+    let login = document.getElementById('userLoginInput')?.value.trim();
+    if(!login || !users[login]) { showNotification("Пользователь не найден"); return; }
+    if(!groups[groupId].members.includes(login)) {
+        groups[groupId].members.push(login);
+        localStorage.setItem("BetaMessenger_groups", JSON.stringify(groups));
+        showNotification(`✅ ${login} добавлен в группу`);
+        document.querySelector('.modal')?.remove();
+        updateGroupsList();
+        if(currentChat === groupId) renderMessages();
+    } else showNotification("Уже в группе");
+}
+function updateGroupsList() {
+    let userGroups = Object.entries(groups).filter(([id, g]) => g.members.includes(currentUser));
+    let div = document.getElementById('groupsList');
+    document.getElementById('groupsCount').innerHTML = `(${userGroups.length})`;
+    if(!userGroups.length) { div.innerHTML = '<div class="small" style="padding:12px">➕ Создайте группу в настройках</div>'; return; }
+    div.innerHTML = '';
+    userGroups.forEach(([id, g]) => {
+        let el = document.createElement('div'); el.className='group-item';
+        el.onclick = () => openGroupChat(id);
+        el.innerHTML = `<div class="friend-info"><span class="friend-avatar">👥</span><div><b>${escapeHTML(g.name)}</b><br><small>${g.members.length} участников</small></div></div><button class="send-cat-btn" onclick="event.stopPropagation(); addToGroup('${id}')">➕</button>`;
+        div.appendChild(el);
+    });
+}
+function openGroupChat(groupId) {
+    currentChat = groupId;
+    currentChatType = 'group';
+    let g = groups[groupId];
+    document.getElementById('chatTitle').innerHTML = `👥 ${escapeHTML(g.name)} <small>${g.members.length} чел.</small>`;
+    renderMessages();
+}
+function sendGroupMessage(groupId, text, photoData = null) {
+    let msg = { id: Date.now() + '_' + Math.random(), sender: currentUser, text: text, type: photoData ? 'photo' : 'text', time: Date.now() };
+    if(photoData) msg.photoData = photoData;
+    groups[groupId].messages.push(msg);
+    localStorage.setItem("BetaMessenger_groups", JSON.stringify(groups));
+    if(currentChat === groupId) renderMessages();
+}
+
+// ========== СТИКЕРЫ ==========
+function openStickerManager() {
+    let modal = document.createElement('div'); modal.className='modal';
+    modal.innerHTML = `<div class="modal-content"><h3>🎨 СТИКЕРЫ</h3><button onclick="createStickerPack()" style="margin:10px;">➕ Создать набор</button><div id="userStickerPacks"></div><button onclick="this.closest('.modal').remove()">Закрыть</button></div>`;
+    document.body.appendChild(modal);
+    refreshStickerPacksList();
+}
+function refreshStickerPacksList() {
+    let userPacks = Object.entries(stickerPacks).filter(([id, pack]) => pack.owner === currentUser);
+    let container = document.getElementById('userStickerPacks');
+    if(!container) return;
+    container.innerHTML = '';
+    userPacks.forEach(([id, pack]) => {
+        let div = document.createElement('div'); div.className='sticker-pack';
+        div.innerHTML = `<div style="display:flex; justify-content:space-between;"><b>${escapeHTML(pack.name)}</b><button onclick="deleteStickerPack('${id}')">🗑️</button></div>
+        <div class="sticker-grid" id="grid-${id}"></div>
+        <button onclick="addStickerToPack('${id}')" style="margin-top:8px;">➕ Добавить эмодзи</button>
+        <button onclick="addPhotoStickerToPack('${id}')" style="margin-top:8px;">📸 Добавить фото</button>`;
+        let grid = div.querySelector(`.sticker-grid`);
+        (pack.stickers || []).forEach((sticker, idx) => {
+            let stickerDiv = document.createElement('div'); stickerDiv.className='sticker-item';
+            if(sticker.startsWith('<img')) stickerDiv.innerHTML = sticker;
+            else stickerDiv.innerHTML = `<span style="font-size:32px;">${sticker}</span>`;
+            let delBtn = document.createElement('div'); delBtn.className='sticker-delete'; delBtn.innerHTML = '✕'; delBtn.onclick = (e) => { e.stopPropagation(); removeSticker(id, idx); };
+            stickerDiv.appendChild(delBtn);
+            grid.appendChild(stickerDiv);
+        });
+        container.appendChild(div);
+    });
+}
+function createStickerPack() { let name = prompt("Название набора:"); if(name) { let id = 'pack_' + Date.now(); stickerPacks[id] = { owner: currentUser, name: name, stickers: [] }; localStorage.setItem("BetaMessenger_stickers", JSON.stringify(stickerPacks)); refreshStickerPacksList(); showNotification("✅ Набор создан!"); } }
+function deleteStickerPack(packId) { if(confirm("Удалить набор?")) { delete stickerPacks[packId]; localStorage.setItem("BetaMessenger_stickers", JSON.stringify(stickerPacks)); refreshStickerPacksList(); showNotification("✅ Набор удалён"); } }
+function addStickerToPack(packId) { let emoji = prompt("Введите эмодзи:"); if(emoji) { stickerPacks[packId].stickers.push(emoji); localStorage.setItem("BetaMessenger_stickers", JSON.stringify(stickerPacks)); refreshStickerPacksList(); showNotification("✅ Стикер добавлен!"); } }
+function addPhotoStickerToPack(packId) {
+    let input = document.createElement('input'); input.type = 'file'; input.accept = 'image/*';
+    input.onchange = e => {
+        let file = e.target.files[0];
+        if(file) {
+            let reader = new FileReader();
+            reader.onload = ev => {
+                let imgHtml = `<img src="${ev.target.result}" style="width:50px; height:50px; object-fit:cover; border-radius:12px;">`;
+                stickerPacks[packId].stickers.push(imgHtml);
+                localStorage.setItem("BetaMessenger_stickers", JSON.stringify(stickerPacks));
+                refreshStickerPacksList();
+                showNotification("✅ Фото-стикер добавлен!");
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    input.click();
+}
+function removeSticker(packId, index) { stickerPacks[packId].stickers.splice(index, 1); localStorage.setItem("BetaMessenger_stickers", JSON.stringify(stickerPacks)); refreshStickerPacksList(); showNotification("✅ Стикер удалён"); }
+function toggleStickerPanel() { if(!users[currentUser]?.premium) { showNotification("💎 Стикеры доступны только с премиум"); return; } let panel = document.getElementById('stickerPanel'); if(panel.style.display === 'none') { panel.style.display = 'flex'; loadStickersToPanel(); } else panel.style.display = 'none'; }
+function loadStickersToPanel() {
+    let panel = document.getElementById('stickerPanel');
+    panel.innerHTML = '';
+    let userPacks = Object.entries(stickerPacks).filter(([id, pack]) => pack.owner === currentUser);
+    userPacks.forEach(([id, pack]) => {
+        (pack.stickers || []).forEach(sticker => {
+            let stickerDiv = document.createElement('div');
+            stickerDiv.className = 'sticker';
+            stickerDiv.innerHTML = sticker;
+            stickerDiv.onclick = () => sendSticker(sticker);
+            panel.appendChild(stickerDiv);
+        });
+    });
+    if(userPacks.length === 0 || (userPacks.length > 0 && userPacks.every(p => p[1].stickers.length === 0))) panel.innerHTML = '<div style="color:#aaa;">Нет стикеров, создайте набор в настройках</div>';
+}
+function sendSticker(stickerHtml) { if(!currentChat) { showNotification("Выберите чат"); return; } let key = getKey(currentUser, currentChat); if(!privateChats[key]) privateChats[key] = []; privateChats[key].push({ id: Date.now() + '_' + Math.random(), sender: currentUser, sticker: stickerHtml, type: 'sticker', time: Date.now() }); localStorage.setItem("BetaMessenger_chats", JSON.stringify(privateChats)); fullRefresh(); playSound(); document.getElementById('stickerPanel').style.display = 'none'; }
+
+// ========== ПРОМО-КОДЫ ==========
+function applyPromoCode(code) {
+    let u = users[currentUser];
+    let success = false;
+    switch(code) {
+        case 'free': u.wallet = (u.wallet||0) + 500; success = true; showNotification("🎁 +500 CATS!"); break;
+        case 'dddima': if(!u.boughtBackgrounds?.includes('dddima')) { if(!u.boughtBackgrounds) u.boughtBackgrounds = []; u.boughtBackgrounds.push('dddima'); success = true; showNotification("✅ Фон DDDIMA получен!"); } else showNotification("Уже есть"); break;
+        case 'prem': if(!u.premium) { u.premium = true; success = true; showNotification("💎 Премиум активирован!"); } else showNotification("Премиум уже есть"); break;
+        case 'dev': if(!u.isTester) { u.isTester = true; u.isDev = true; success = true; showNotification("🔧 Статус тестера!"); } else showNotification("Уже есть"); break;
+        case 'frank': if(!u.hasFrank) { u.hasFrank = true; success = true; showNotification("🎭 Стикер Фрэнка активирован!"); } else showNotification("Уже есть"); break;
+        case 'admin': if(!u.isAdmin) { u.isAdmin = true; success = true; showNotification("🔓 Админ-панель разблокирована!"); } else showNotification("Вы уже админ"); break;
+        default: showNotification("❌ Неверный код");
+    }
+    if(success) { localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); }
+}
+
+// ========== АДМИН-ПАНЕЛЬ ==========
+function openAdminPanel() {
+    if(!users[currentUser]?.isAdmin) { showNotification("❌ Доступ запрещён! Введите промо-код 'admin'"); return; }
+    let modal = document.createElement('div'); modal.className='admin-panel';
+    modal.innerHTML = `<div class="admin-content"><h3>🔧 АДМИН-ПАНЕЛЬ</h3>
+        <input type="text" id="adminUserLogin" placeholder="Логин пользователя" class="admin-input">
+        <input type="number" id="adminAmount" placeholder="Сумма CATS" class="admin-input">
+        <button onclick="addCatsToUser()" style="margin:5px;">💰 Накрутить CATS</button>
+        <button onclick="this.closest('.admin-panel').remove()">Закрыть</button>
+    </div>`;
+    document.body.appendChild(modal);
+}
+function addCatsToUser() {
+    let login = document.getElementById('adminUserLogin')?.value.trim();
+    let amount = parseNumber(document.getElementById('adminAmount')?.value);
+    if(!login || !users[login]) { showNotification("Пользователь не найден"); return; }
+    if(amount <= 0) { showNotification("Сумма должна быть > 0"); return; }
+    users[login].wallet = (users[login].wallet || 0) + amount;
+    localStorage.setItem("BetaMessenger_users", JSON.stringify(users));
+    showNotification(`✅ Добавлено ${formatNumber(amount)} CATS пользователю ${login}`);
+    document.querySelector('.admin-panel')?.remove();
+    fullRefresh();
+}
+
+// ========== НАСТРОЙКИ ==========
+function openSettings() {
+    let modal = document.createElement('div'); modal.className = 'settings-panel';
+    let adminBtn = users[currentUser]?.isAdmin ? `<button onclick="openAdminPanel(); this.closest('.settings-panel').remove()">🔧 Админ-панель</button>` : '';
+    let premiumBadgeBtn = users[currentUser]?.premium ? `<button onclick="openBadgeSettings(); this.closest('.settings-panel').remove()">🏷️ Настройка значков</button>` : '';
+    let tenorGifBtn = users[currentUser]?.premium ? `<button onclick="setTenorGif(); this.closest('.settings-panel').remove()">🎬 Установить GIF с Tenor</button>` : '';
+    modal.innerHTML = `<div class="settings-content"><h3>⚙️ НАСТРОЙКИ</h3>
+        <div class="settings-grid">
+            <button onclick="openBankWindow(); this.closest('.settings-panel').remove()">🏦 Cat‑Bank</button>
+            <button onclick="openCustomizeModal(); this.closest('.settings-panel').remove()">🎨 Кастомизация</button>
+            <button onclick="claimDailyBonus(); this.closest('.settings-panel').remove()">🎁 Ежедневный бонус</button>
+            <button onclick="showCreateGroupModal(); this.closest('.settings-panel').remove()">👥 Создать группу</button>
+            <button onclick="openPrivacyPolicy(); this.closest('.settings-panel').remove()">📋 Политика конфиденциальности</button>
+            ${users[currentUser]?.premium ? `<button onclick="openStickerManager(); this.closest('.settings-panel').remove()">🎨 Стикеры</button>` : '<button disabled style="opacity:0.5;">💎 Стикеры (только премиум)</button>'}
+            ${premiumBadgeBtn}
+            ${tenorGifBtn}
+            <button onclick="showPromoModal(); this.closest('.settings-panel').remove()">🎫 Ввести промо-код</button>
+            <button onclick="toggleTheme(); this.closest('.settings-panel').remove()">🎨 Сменить тему</button>
+            ${adminBtn}
+        </div>
+        <button onclick="this.closest('.settings-panel').remove()" style="margin-top:20px;">Закрыть</button>
+    </div>`;
+    document.body.appendChild(modal);
+    if(window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches) document.getElementById('sidebar').classList.remove('open');
+}
+function showPromoModal() {
+    let modal = document.createElement('div'); modal.className='modal';
+    modal.innerHTML = `<div class="modal-content"><h3>🎁 ПРОМО-КОД</h3>
+        <input id="promoInput" class="admin-input" style="margin:15px 0;" placeholder="Введите код">
+        <button onclick="applyPromoCodeFromModal()">Активировать</button>
+        <button onclick="this.closest('.modal').remove()">Закрыть</button>
+    </div>`;
+    document.body.appendChild(modal);
+}
+function applyPromoCodeFromModal() { let code = document.getElementById('promoInput')?.value.trim().toLowerCase(); if(code) { applyPromoCode(code); document.querySelector('.modal')?.remove(); } }
+
+// ========== БАНК (с магазином фонов) ==========
+function openBankWindow() {
+    if(bankWindow) { bankWindow.style.display='flex'; refreshBankContent(); return; }
+    let win = document.createElement('div'); win.className='bank-window'; win.id='bankWindow';
+    win.innerHTML = `<div class="bank-header" id="bankHeader"><span>🏦 Cat-Bank / ${currentUser}</span><div><span id="minimizeBankBtn" style="cursor:pointer; margin-right:15px;">➖</span><span id="closeBankBtn" style="cursor:pointer;">✕</span></div></div><div class="bank-body" id="bankBody"></div>`;
+    document.body.appendChild(win); bankWindow=win;
+    document.getElementById('closeBankBtn').onclick = () => bankWindow.style.display='none';
+    document.getElementById('minimizeBankBtn').onclick = () => bankWindow.style.display='none';
+    let header = win.querySelector('#bankHeader');
+    let isDrag=false, sx,sy,l,t;
+    header.onmousedown = (e) => { if(e.target===header||header.contains(e.target)) { isDrag=true; sx=e.clientX; sy=e.clientY; l=win.offsetLeft; t=win.offsetTop; win.style.cursor='grabbing'; e.preventDefault(); } };
+    window.onmousemove = (e) => { if(isDrag) { win.style.left=(l+e.clientX-sx)+'px'; win.style.top=(t+e.clientY-sy)+'px'; } };
+    window.onmouseup = () => { isDrag=false; win.style.cursor='default'; };
+    win.style.display='flex'; refreshBankContent();
+}
+function refreshBankContent() {
+    let user = users[currentUser];
+    if(!user) return;
+    document.getElementById('bankBody').innerHTML = `
+        <div class="bank-card"><div>💳 CATS CARD</div><div class="btc-rate" style="font-size:22px;">1 BTC = ${100 + Math.floor((user.bitcoinCoins||0)*2)} CATS</div><div style="font-size:32px; font-weight:bold; color:#fbbf24;">${formatNumber(user.wallet)} CATS</div></div>
+        <div><h3>⛏️ МАЙНИНГ</h3>${!user.hasMiner ? `<button class="bank-action-btn" onclick="buyMiner()">💰 Купить майнер за 500 CATS</button>` : `<div class="mining-progress" style="height:8px; background:#2a3a5a; border-radius:4px; overflow:hidden;"><div class="mining-fill" style="width:${((user.bitcoin||0)%1)*100}%; height:100%; background:linear-gradient(90deg,#fbbf24,#ff8c00); transition:width 0.3s;"></div></div><div>₿ ${(user.bitcoin||0).toFixed(4)} BTC | 💰 Coins: ${user.bitcoinCoins||0}</div><button class="bank-action-btn" onclick="exchangeBtcToCats()">💱 Обменять BTC → CATS</button>`}</div>
+        <div><h3>📤 ПЕРЕВОД</h3><input id="transferTo" placeholder="Логин получателя" class="bank-input"><input id="transferAmount" placeholder="Сумма" class="bank-input" type="number"><button class="bank-action-btn" onclick="makeTransfer()">💸 Перевести</button></div>
+        <div><h3>🎨 МАГАЗИН ФОНОВ</h3><div id="bgShopBank" class="shop-grid"></div></div>
+        <div><h3>🎁 ПРОМО-КОД</h3><input id="promoCodeBank" class="bank-input"><button class="bank-action-btn" onclick="applyPromoCodeFromBank()">🎟️ Активировать</button></div>
+    `;
+    let shopDiv = document.getElementById('bgShopBank');
+    backgrounds.forEach(bg => {
+        let owned = user.boughtBackgrounds?.includes(bg.id);
+        let btn = document.createElement('div'); btn.className='shop-item';
+        btn.innerHTML = `<div style="font-size:32px;">${bg.preview}</div><div style="font-size:12px;">${bg.name}</div>${owned ? '✅' : `<button class="bank-action-btn" onclick="buyBackground('${bg.id}')" style="margin-top:6px;">${bg.price>0?formatNumber(bg.price)+' CATS':'ПРОМО'}</button>`}`;
+        shopDiv.appendChild(btn);
+    });
+}
+function buyBackground(bgId) {
+    let user = users[currentUser];
+    let bg = backgrounds.find(b=>b.id===bgId);
+    if(!bg || bg.price===0) return;
+    if(user.boughtBackgrounds?.includes(bgId)) return showNotification("Уже есть");
+    if((user.wallet||0) >= bg.price) {
+        user.wallet -= bg.price;
+        if(!user.boughtBackgrounds) user.boughtBackgrounds=[];
+        user.boughtBackgrounds.push(bgId);
+        localStorage.setItem("BetaMessenger_users", JSON.stringify(users));
+        fullRefresh();
+        if(bankWindow && bankWindow.style.display==='flex') refreshBankContent();
+        showNotification(`✅ Куплен фон ${bg.name}!`);
+    } else showNotification("Недостаточно CATS");
+}
+function buyMiner() { let user = users[currentUser]; if(user.hasMiner) return showNotification("Майнер уже есть!"); if((user.wallet||0) >= 500) { user.wallet -= 500; user.hasMiner = true; user.bitcoin = user.bitcoin||0; user.bitcoinCoins = user.bitcoinCoins||0; localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); if(bankWindow && bankWindow.style.display==='flex') refreshBankContent(); showNotification("✅ Майнер куплен!"); } else showNotification("❌ Нужно 500 CATS"); }
+function exchangeBtcToCats() { let user = users[currentUser]; let coins = user.bitcoinCoins || 0; if(coins>0) { let rate = 100 + Math.floor((user.bitcoinCoins||0)*2); user.wallet = (user.wallet||0) + coins*rate; user.bitcoinCoins = 0; user.bitcoin = 0; localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); showNotification(`💱 Обменяно ${coins} BTC → ${formatNumber(coins*rate)} CATS`); if(bankWindow && bankWindow.style.display==='flex') refreshBankContent(); } else showNotification("Нет BTC"); }
+function makeTransfer() { let to = document.getElementById('transferTo')?.value.trim(); let amount = parseNumber(document.getElementById('transferAmount')?.value); let user = users[currentUser]; if(!to || !users[to]) return showNotification("Не найден"); if(to === currentUser) return showNotification("Нельзя себе"); if(amount<=0) return showNotification("Сумма >0"); if((user.wallet||0) < amount) return showNotification("Недостаточно"); user.wallet -= amount; users[to].wallet = (users[to].wallet||0) + amount; localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); showNotification(`✅ Переведено ${formatNumber(amount)} CATS → ${to}`); if(bankWindow && bankWindow.style.display==='flex') refreshBankContent(); }
+function applyPromoCodeFromBank() { let code = document.getElementById('promoCodeBank')?.value.trim().toLowerCase(); if(code) { applyPromoCode(code); if(bankWindow && bankWindow.style.display==='flex') refreshBankContent(); } }
+
+// ========== ОСТАЛЬНЫЕ ФУНКЦИИ ==========
+function claimDailyBonus() { let user = users[currentUser]; let last = user.lastBonusDate || 0; let today = new Date().toDateString(); if(last === today) { showNotification("❌ Бонус уже получен!"); return; } let streak = user.bonusStreak || 0; if(last && new Date(last).getTime()+86400000 < Date.now()-86400000) streak=0; streak++; let amount = Math.min(100+streak*50,1000); let extra = 0; if(streak===7) extra=500; if(streak===14) extra=1000; if(streak===30) { extra=3000; if(!user.boughtBorders) user.boughtBorders=[]; if(!user.boughtBorders.includes('neon-purple')) user.boughtBorders.push('neon-purple'); showNotification("🎨 Обводка в подарок!"); } user.wallet = (user.wallet||0) + amount + extra; user.lastBonusDate = today; user.bonusStreak = streak; localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); showNotification(`🎁 +${formatNumber(amount+extra)} CATS (стрик ${streak})`); }
+function startMining() { if(miningInterval) clearInterval(miningInterval); miningInterval = setInterval(() => { let user = users[currentUser]; if(!user || !user.hasMiner) return; let btc = user.bitcoin || 0; let n = btc + 0.01; if(n >= 0.99) { user.bitcoinCoins = (user.bitcoinCoins||0) + Math.floor(n); n = n - Math.floor(n); } user.bitcoin = parseFloat(n.toFixed(4)); localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); if(bankWindow && bankWindow.style.display === 'flex') refreshBankContent(); }, 1000); }
+function openCustomizeModal() { let u = users[currentUser]; let modal = document.createElement('div'); modal.className='modal'; modal.innerHTML = `<div class="modal-content"><h3>🎨 КАСТОМИЗАЦИЯ</h3><div><strong>Фоны:</strong><div id="customBgList" style="display:flex; flex-wrap:wrap; gap:10px; margin:15px 0;"></div></div><div><strong>Обводки:</strong><div id="customBorderList" style="display:flex; flex-wrap:wrap; gap:10px; margin:15px 0;"></div></div><button class="bank-action-btn" onclick="this.closest('.modal').remove()" style="width:auto; padding:10px 20px;">Закрыть</button></div>`; document.body.appendChild(modal); let bgDiv = document.getElementById('customBgList'); backgrounds.forEach(bg => { let owned = u.boughtBackgrounds?.includes(bg.id); let btn = document.createElement('div'); btn.style.cssText='background:#0f141f; border-radius:16px; padding:10px; text-align:center; width:90px;'; btn.innerHTML = `<div style="font-size:28px;">${bg.preview}</div><div>${bg.name}</div>${owned ? `<button onclick="setBackground('${bg.id}');this.closest('.modal').remove()" style="margin-top:5px;">👑 Надеть</button>` : ''}`; bgDiv.appendChild(btn); }); let borderDiv = document.getElementById('customBorderList'); borders.forEach(b => { let owned = u.boughtBorders?.includes(b.id); let btn = document.createElement('div'); btn.style.cssText='background:#0f141f; border-radius:16px; padding:10px; text-align:center; width:90px;'; btn.innerHTML = `<div style="font-size:28px;">${b.preview}</div><div>${b.name}</div>${owned ? `<button onclick="setBorder('${b.id}');this.closest('.modal').remove()" style="margin-top:5px;">👑 Надеть</button>` : ''}`; borderDiv.appendChild(btn); }); }
+function setBackground(bgId) { users[currentUser].activeBackground = bgId; localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); showNotification("Фон обновлён!"); }
+function setBorder(borderId) { let cl = borderId==='neon-purple'?'avatar-border-neon-purple':borderId==='neon-red'?'avatar-border-neon-red':'avatar-border-neon-pink'; users[currentUser].avatarBorder = cl; localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); showNotification("Обводка надета!"); }
+function toggleTheme() { let nt = document.body.classList.contains('classic')?'neon':'classic'; document.body.classList.remove('classic','neon'); document.body.classList.add(nt); localStorage.setItem('Beta_theme',nt); showNotification(`🎨 Тема: ${nt}`); }
+function fullRefresh() {
+    if(!currentUser) return;
+    users = JSON.parse(localStorage.getItem("BetaMessenger_users")) || {};
+    privateChats = JSON.parse(localStorage.getItem("BetaMessenger_chats")) || {};
+    stickerPacks = JSON.parse(localStorage.getItem("BetaMessenger_stickers")) || {};
+    groups = JSON.parse(localStorage.getItem("BetaMessenger_groups")) || {};
+    let u = users[currentUser];
+    if(!u) return;
+    document.getElementById('walletBalance').innerHTML = formatNumber(u.wallet || 0);
+    let friendsList = u.friends || [];
+    let allFriends = [{ login: BOT_LOGIN, user: users[BOT_LOGIN] }, ...friendsList.map(l=>({login:l, user:users[l]}))];
+    let div = document.getElementById('friendsList');
+    document.getElementById('friendsCount').innerHTML = `(${allFriends.length})`;
+    div.innerHTML = '';
+    let hidden = u.hiddenBadges || [];
+    allFriends.forEach(({login,user}) => {
+        if(!user) return;
+        let border = user.avatarBorder ? `style="box-shadow:0 0 0 2px ${user.avatarBorder.includes('purple')?'#9c54ff':user.avatarBorder.includes('red')?'#ff4444':'#ff69b4'},0 0 8px;"` : '';
+        let premiumBadge = (!hidden.includes('premium') && user.premium) ? '👑' : '';
+        let verifiedBadge = (!hidden.includes('verified') && user.verified) ? '✓' : '';
+        let testerBadge = (!hidden.includes('tester') && user.isTester) ? '<span class="tester-badge">⚙️ Тестер</span>' : '';
+        let devBadge = (!hidden.includes('dev') && user.isDev) ? '<span class="dev-badge">🔧 Dev</span>' : '';
+        let adminBadge = (!hidden.includes('admin') && user.isAdmin) ? '<span class="admin-badge">👑 Admin</span>' : '';
+        let frankBadge = (!hidden.includes('frank') && user.hasFrank) ? `<img src="${FRANK_GIF_URL}" style="width:20px; height:20px; border-radius:50%;">` : '';
+        let customGif = (!hidden.includes('customGif') && user.customGif) ? `<img src="${user.customGif}" style="width:24px; height:24px; border-radius:50%;">` : '';
+        let el = document.createElement('div'); el.className='friend-item';
+        el.onclick = () => { currentChat = login; currentChatType = 'user'; document.getElementById('chatTitle').innerHTML = `${user.avatar} ${escapeHTML(user.name)} <span style="font-size:12px;">@${login}</span>`; renderMessages(); };
+        el.innerHTML = `<div class="friend-info"><div class="friend-avatar" ${border}>${user.avatar}</div><div><div>${escapeHTML(user.name)} ${verifiedBadge} ${premiumBadge} ${testerBadge} ${devBadge} ${adminBadge} ${frankBadge} ${customGif}</div><div>@${login}</div></div></div>`;
+        div.appendChild(el);
+    });
+    let reqs = u.friendRequests || [];
+    let reqDiv = document.getElementById('requestsList'); let sp = document.getElementById('requestsCount');
+    if(!reqs.length) { reqDiv.innerHTML='<div style="padding:12px; text-align:center;">Нет заявок</div>'; sp.innerText=''; }
+    else { sp.innerText = `(${reqs.length})`; reqDiv.innerHTML = ''; reqs.forEach(login => { let r=users[login]; let el=document.createElement('div'); el.className='request-item'; el.innerHTML = `<div class="friend-info"><div class="friend-avatar">${r.avatar}</div><div><div>${escapeHTML(r.name)}</div><div>@${login}</div></div></div><div><button onclick="acceptFriend('${login}')" style="background:#22c55e; border:none; padding:4px 12px; border-radius:20px;">✅</button><button onclick="rejectFriend('${login}')" style="background:#dc2626; border:none; padding:4px 12px; border-radius:20px;">❌</button></div>`; reqDiv.appendChild(el); }); }
+    updateGroupsList();
+    if(currentChat && (currentChatType === 'user' ? privateChats[getKey(currentUser, currentChat)] : groups[currentChat]?.messages)) renderMessages();
+    updateProfileUI();
+    if(bankWindow && bankWindow.style.display === 'flex') refreshBankContent();
+}
+function renderMessages() { let div = document.getElementById('messages'); if(!currentChat) { div.innerHTML='<div style="text-align:center;">💬 Выберите чат</div>'; return; } let messages = []; if(currentChatType === 'user') messages = privateChats[getKey(currentUser, currentChat)] || []; else messages = groups[currentChat]?.messages || []; div.innerHTML = ''; messages.forEach(m => { let msgDiv = document.createElement('div'); msgDiv.className = `message ${m.sender===currentUser?'me':''}`; let sn = users[m.sender]?.name || m.sender; let content = ''; if(m.type==='photo') content = `<div><b>${escapeHTML(sn)}</b><br><img src="${m.photoData}" style="max-width:180px; border-radius:12px; margin-top:8px; cursor:pointer;" onclick="viewImage('${m.photoData}')"></div>`; else if(m.type==='sticker') { if(m.sticker.includes('<img')) content = `<div class="sticker-message-img">${m.sticker}</div>`; else content = `<div class="sticker-message">${m.sticker}</div>`; } else content = `<div><b>${escapeHTML(sn)}</b><br>${escapeHTML(m.text)}</div>`; msgDiv.innerHTML = `${content}<div style="font-size:10px; margin-top:4px;">${new Date(m.time).toLocaleTimeString()}</div>`; div.appendChild(msgDiv); }); div.scrollTop = div.scrollHeight; }
+function updateProfileUI() { let u = users[currentUser]; if(!u) return; document.getElementById('profileAvatar').innerHTML = u.avatar; let bc = u.avatarBorder || ''; let av = document.querySelector('.profile-avatar'); if(av) av.classList.remove('avatar-border-neon-purple','avatar-border-neon-red','avatar-border-neon-pink'); if(bc) av.classList.add(bc); let bgId = u.activeBackground; let bgDiv = document.getElementById('profileBg'); if(bgDiv) { bgDiv.className = 'profile-bg'; if(bgId) bgDiv.classList.add(bgId); } let hidden = u.hiddenBadges || []; let premiumBadge = (!hidden.includes('premium') && u.premium) ? '👑' : ''; let verifiedBadge = (!hidden.includes('verified') && u.verified) ? '✓' : ''; let testerBadge = (!hidden.includes('tester') && u.isTester) ? '<span class="tester-badge">⚙️ Тестер беты</span>' : ''; let devBadge = (!hidden.includes('dev') && u.isDev) ? '<span class="dev-badge">🔧 Dev</span>' : ''; let adminBadge = (!hidden.includes('admin') && u.isAdmin) ? '<span class="admin-badge">👑 Admin</span>' : ''; let frankBadge = (!hidden.includes('frank') && u.hasFrank) ? `<img src="${FRANK_GIF_URL}" style="width:24px; height:24px; border-radius:50%;">` : ''; let customGif = (!hidden.includes('customGif') && u.customGif) ? `<img src="${u.customGif}" style="width:28px; height:28px; border-radius:50%;">` : ''; document.getElementById('profileName').innerHTML = `${escapeHTML(u.name)} ${verifiedBadge} ${premiumBadge} ${testerBadge} ${devBadge} ${adminBadge} ${frankBadge} ${customGif}`; document.getElementById('profileLogin').innerText = '@'+currentUser; document.getElementById('userKey').innerText = u.secretKey; }
+function acceptFriend(login) { users[currentUser].friends.push(login); users[login].friends.push(currentUser); users[currentUser].friendRequests = users[currentUser].friendRequests.filter(f=>f!==login); localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); showNotification(`🎉 Друг добавлен`); }
+function rejectFriend(login) { users[currentUser].friendRequests = users[currentUser].friendRequests.filter(f=>f!==login); localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); }
+function searchUser() { let q = document.getElementById('searchInput').value.trim().toLowerCase(); let res = document.getElementById('searchResult'); if(!q) { res.innerHTML=''; return; } let found = users[q]; if(!found) { res.innerHTML='<div style="color:#f87171;">❌ Не найден</div>'; return; } if(q===currentUser) { res.innerHTML='<div style="color:#22c55e;">✨ Это вы</div>'; return; } let isFriend = users[currentUser].friends.includes(q); let pending = users[currentUser].friendRequests.includes(q); let btn = isFriend ? '<button disabled>✓ Друг</button>' : (pending ? '<button disabled>⏳ Отправлено</button>' : `<button onclick="sendFriendReq('${q}')" style="padding:6px 12px;">➕ Добавить</button>`); let hidden = users[currentUser]?.hiddenBadges || []; let premiumBadge = (!hidden.includes('premium') && found.premium) ? '👑' : ''; let verifiedBadge = (!hidden.includes('verified') && found.verified) ? '✓' : ''; let testerBadge = (!hidden.includes('tester') && found.isTester) ? '<span class="tester-badge" style="font-size:10px;">⚙️ Тестер</span>' : ''; let devBadge = (!hidden.includes('dev') && found.isDev) ? '<span class="dev-badge" style="font-size:10px;">🔧 Dev</span>' : ''; let adminBadge = (!hidden.includes('admin') && found.isAdmin) ? '<span class="admin-badge" style="font-size:10px;">👑 Admin</span>' : ''; let frankBadge = (!hidden.includes('frank') && found.hasFrank) ? `<img src="${FRANK_GIF_URL}" style="width:20px; height:20px; border-radius:50%;">` : ''; let customGif = (!hidden.includes('customGif') && found.customGif) ? `<img src="${found.customGif}" style="width:20px; height:20px; border-radius:50%;">` : ''; res.innerHTML = `<div style="background:#1f2a3f; border-radius:16px; padding:14px; margin-top:8px;"><div style="display:flex; gap:12px;"><div style="width:48px; height:48px; background:#0f141f; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px;">${found.avatar}</div><div><div>${escapeHTML(found.name)} ${verifiedBadge} ${premiumBadge} ${testerBadge} ${devBadge} ${adminBadge} ${frankBadge} ${customGif}</div><div>@${q}</div><div style="color:#fbbf24;">🐱 ${formatNumber(found.wallet||0)}</div></div></div><div style="margin-top:12px;">${btn}<button onclick="viewFriendProfile('${q}')" style="margin-left:10px; padding:6px 12px;">👤 Профиль</button></div></div>`; }
+function viewFriendProfile(login) { let u = users[login]; let hidden = users[currentUser]?.hiddenBadges || []; let border = u.avatarBorder ? `box-shadow:0 0 0 3px ${u.avatarBorder.includes('purple')?'#9c54ff':u.avatarBorder.includes('red')?'#ff4444':'#ff69b4'},0 0 12px;` : ''; let premiumBadge = (!hidden.includes('premium') && u.premium) ? '👑' : ''; let verifiedBadge = (!hidden.includes('verified') && u.verified) ? '✓' : ''; let testerBadge = (!hidden.includes('tester') && u.isTester) ? '<div class="tester-badge">⚙️ Тестер беты</div>' : ''; let devBadge = (!hidden.includes('dev') && u.isDev) ? '<div class="dev-badge">🔧 Dev</div>' : ''; let adminBadge = (!hidden.includes('admin') && u.isAdmin) ? '<div class="admin-badge">👑 Admin</div>' : ''; let frankBadge = (!hidden.includes('frank') && u.hasFrank) ? `<img src="${FRANK_GIF_URL}" style="width:28px; height:28px; border-radius:50%; display:inline-block; margin-top:5px;">` : ''; let customGif = (!hidden.includes('customGif') && u.customGif) ? `<img src="${u.customGif}" style="width:28px; height:28px; border-radius:50%; display:inline-block; margin-top:5px;">` : ''; let modal = document.createElement('div'); modal.className='modal'; modal.innerHTML = `<div style="background:#171d2b; padding:24px; border-radius:24px; width:360px; text-align:center;"><div style="font-size:64px; width:100px; height:100px; margin:0 auto; display:flex; align-items:center; justify-content:center; border-radius:50%; ${border}">${u.avatar}</div><h3>${escapeHTML(u.name)}</h3><div>@${login}</div>${verifiedBadge}${premiumBadge}${testerBadge}${devBadge}${adminBadge}${frankBadge}${customGif}<div style="margin:10px 0;">🐱 ${formatNumber(u.wallet||0)} CATS</div><div>${u.premium ? '👑 Премиум' : ''} ${u.verified ? '✓ Верифицирован' : ''}</div><button onclick="this.closest('.modal').remove()" style="margin-top:15px;">Закрыть</button></div>`; document.body.appendChild(modal); }
+function sendFriendReq(to) { if(users[to].friendRequests.includes(currentUser)) return; users[to].friendRequests.push(currentUser); localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); fullRefresh(); showNotification(`📨 Заявка отправлена`); }
+function sendMessage() { if(!currentChat) { showNotification("Выберите чат"); return; } let text = document.getElementById('msgInput').value.trim(); if(!text) return; if(currentChatType === 'user') { let key = getKey(currentUser, currentChat); if(!privateChats[key]) privateChats[key]=[]; privateChats[key].push({ id: Date.now() + '_' + Math.random(), sender: currentUser, text, type:'text', time:Date.now() }); localStorage.setItem("BetaMessenger_chats", JSON.stringify(privateChats)); } else { sendGroupMessage(currentChat, text); } document.getElementById('msgInput').value = ''; fullRefresh(); playSound(); }
+function sendPhoto() { let file = document.getElementById('photoInput').files[0]; if(!file||!currentChat) return; let reader = new FileReader(); reader.onload = e => { if(currentChatType === 'user') { let key = getKey(currentUser, currentChat); if(!privateChats[key]) privateChats[key]=[]; privateChats[key].push({ id: Date.now() + '_' + Math.random(), sender: currentUser, photoData: e.target.result, type:'photo', time:Date.now() }); localStorage.setItem("BetaMessenger_chats", JSON.stringify(privateChats)); } else { sendGroupMessage(currentChat, '', e.target.result); } fullRefresh(); playSound(); }; reader.readAsDataURL(file); }
+function viewImage(src) { let v = document.createElement('div'); v.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;z-index:20000;cursor:pointer'; v.onclick = () => v.remove(); v.innerHTML = `<img src="${src}" style="max-width:90%; border-radius:16px;">`; document.body.appendChild(v); }
+function logout() { if(miningInterval) clearInterval(miningInterval); sessionStorage.removeItem("Beta_currentUser"); location.reload(); }
+function startApp() { document.getElementById('appContainer').classList.remove('hidden'); fullRefresh(); startMining(); setInterval(() => fullRefresh(), 500); }
+function renderAuth() { let ov = document.createElement('div'); ov.className='auth-overlay'; ov.id='authOverlay'; ov.innerHTML = `<div class="auth-card"><div class="auth-logo"><div style="font-size:56px;">🤖🐱</div><h1>CATGRAM</h1></div><div class="auth-tabs"><button class="tab-btn active" data-tab="login">ВХОД</button><button class="tab-btn" data-tab="register">РЕГИСТРАЦИЯ</button><button class="tab-btn" data-tab="key">КЛЮЧ</button></div><div id="loginPane" class="tab-pane active"><input id="authLogin" class="auth-input" placeholder="Логин"><input id="authPass" class="auth-input" type="password" placeholder="Пароль"><button class="auth-btn" onclick="authLogin()">ВОЙТИ</button></div><div id="registerPane" class="tab-pane"><input id="regLogin" class="auth-input" placeholder="Логин"><input id="regName" class="auth-input" placeholder="Имя"><div class="avatar-selector"><div class="avatar-option selected" data-avatar="😺">😺</div><div class="avatar-option" data-avatar="😀">😀</div><div class="avatar-option" data-avatar="🐱">🐱</div></div><button onclick="selectCustomAvatar()" style="background:#1f2a3f; border:none; padding:8px; border-radius:30px; width:100%; margin-top:10px;">📸 Своё фото</button><input id="regPass" class="auth-input" type="password" placeholder="Пароль"><button class="auth-btn" onclick="authRegister()">СОЗДАТЬ</button></div><div id="keyPane" class="tab-pane"><input id="keyInput" class="auth-input" placeholder="Введите ключ"><button class="auth-btn" onclick="authKey()">ВОЙТИ</button></div></div>`; document.body.appendChild(ov); let btns = ov.querySelectorAll('.tab-btn'); btns.forEach(btn => { btn.onclick = () => { btns.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); let t=btn.dataset.tab; document.getElementById('loginPane').classList.toggle('active',t==='login'); document.getElementById('registerPane').classList.toggle('active',t==='register'); document.getElementById('keyPane').classList.toggle('active',t==='key'); }; }); let avs = ov.querySelectorAll('.avatar-option'); avs.forEach(a=>{ a.onclick=()=>{ avs.forEach(x=>x.classList.remove('selected')); a.classList.add('selected'); selectedAvatar=a.dataset.avatar; }; }); }
+function selectCustomAvatar() { let inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.onchange=e=>{ let file=e.target.files[0]; if(file){ let r=new FileReader(); r.onload=ev=>{ selectedAvatar=`<img src="${ev.target.result}" style="width:42px; height:42px; border-radius:50%;">`; showNotification("Аватар выбран"); }; r.readAsDataURL(file); } }; inp.click(); }
+function authLogin() { let login=document.getElementById('authLogin').value.trim(); let pass=document.getElementById('authPass').value.trim(); if(!users[login]) { showNotification("Нет пользователя"); return; } if(users[login].password!==pass) { showNotification("Неверный пароль"); return; } currentUser=login; sessionStorage.setItem("Beta_currentUser",currentUser); document.getElementById('authOverlay')?.remove(); startApp(); }
+function authRegister() { let login=document.getElementById('regLogin').value.trim(); let name=document.getElementById('regName').value.trim(); let pass=document.getElementById('regPass').value.trim(); if(login.length<3||name.length<2||pass.length<4) { showNotification("Логин≥3, имя≥2, пароль≥4"); return; } if(users[login]) { showNotification("Занят"); return; } let secret='KEY-'+Math.random().toString(36).substring(2,10).toUpperCase()+'-'+Math.floor(Math.random()*10000); users[login]={ password:pass, name:name, avatar:selectedAvatar, secretKey:secret, friends:[], friendRequests:[], verified:false, premium:false, wallet:500, hasMiner:false, bitcoin:0, bitcoinCoins:0, boughtBackgrounds:[], boughtBorders:[], activeBackground:null, avatarBorder:null, lastBonusDate:null, bonusStreak:0, isTester:false, isDev:false, hasFrank:false, isAdmin:false, hiddenBadges:[], customGif:null }; localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); alert(`✅ Регистрация!\n🔑 Ключ: ${secret}\n🐱 Бонус: 500 CATS`); currentUser=login; sessionStorage.setItem("Beta_currentUser",currentUser); document.getElementById('authOverlay')?.remove(); startApp(); }
+function authKey() { let key=document.getElementById('keyInput').value.trim().toUpperCase(); for(let l in users) { if(users[l].secretKey===key) { currentUser=l; sessionStorage.setItem("Beta_currentUser",currentUser); document.getElementById('authOverlay')?.remove(); startApp(); return; } } showNotification("Неверный ключ"); }
+
+if(!Object.keys(users).length) { users["alex"]={ password:"1234", name:"Алексей", avatar:"😺", secretKey:"KEY-DEMO-001A", friends:[], friendRequests:[], verified:true, premium:true, wallet:3000, hasMiner:true, bitcoin:0.45, bitcoinCoins:0, boughtBorders:['neon-purple'], boughtBackgrounds:[], activeBackground:null, avatarBorder:'avatar-border-neon-purple', lastBonusDate:null, bonusStreak:0, isTester:false, isDev:false, hasFrank:false, isAdmin:false, hiddenBadges:[], customGif:null }; users["dima"]={ password:"1234", name:"Дмитрий", avatar:"😀", secretKey:"KEY-DEMO-002B", friends:[], friendRequests:[], verified:false, premium:false, wallet:1200, hasMiner:false, bitcoin:0, bitcoinCoins:0, boughtBorders:[], boughtBackgrounds:[], activeBackground:null, avatarBorder:null, lastBonusDate:null, bonusStreak:0, isTester:false, isDev:false, hasFrank:false, isAdmin:false, hiddenBadges:[], customGif:null }; localStorage.setItem("BetaMessenger_users", JSON.stringify(users)); }
+let saved = sessionStorage.getItem("Beta_currentUser");
+if(saved && users[saved]) { currentUser=saved; startApp(); } else { document.getElementById('appContainer').classList.add('hidden'); renderAuth(); }
+
+window.openBankWindow=openBankWindow; window.buyMiner=buyMiner; window.exchangeBtcToCats=exchangeBtcToCats; window.makeTransfer=makeTransfer;
+window.setBackground=setBackground; window.setBorder=setBorder; window.viewFriendProfile=viewFriendProfile; window.claimDailyBonus=claimDailyBonus;
+window.toggleTheme=toggleTheme; window.logout=logout; window.openSettings=openSettings; window.toggleStickerPanel=toggleStickerPanel;
+window.createStickerPack=createStickerPack; window.addStickerToPack=addStickerToPack; window.addPhotoStickerToPack=addPhotoStickerToPack; window.deleteStickerPack=deleteStickerPack; window.removeSticker=removeSticker;
+window.toggleSidebar=toggleSidebar; window.changeAvatarFromGallery=changeAvatarFromGallery; window.showCreateGroupModal=showCreateGroupModal;
+window.openAdminPanel=openAdminPanel; window.addCatsToUser=addCatsToUser; window.toggleBadge=toggleBadge; window.openBadgeSettings=openBadgeSettings; window.setTenorGif=setTenorGif;
+</script>
+</body>
+</html>
